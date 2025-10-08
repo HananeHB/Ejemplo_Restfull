@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/productos") // le estpy diciendo que apartir de /productos vamos a trabajar
+@RequestMapping("/productos") // le estoy diciendo que apartir de /productos vamos a trabajar
 public class ProductoController {
     
 }
