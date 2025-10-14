@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 import es.etg.daw.dawes.java.rest.restfull.productos.application.command.CreateProductoCommand;
 import es.etg.daw.dawes.java.rest.restfull.productos.application.service.CreateProductoService;
 import es.etg.daw.dawes.java.rest.restfull.productos.domain.model.Producto;
+import es.etg.daw.dawes.java.rest.restfull.productos.infraestructure.mapper.ProductoMapper;
+import es.etg.daw.dawes.java.rest.restfull.productos.infraestructure.web.dto.ProductoRequest;
+import es.etg.daw.dawes.java.rest.restfull.productos.infraestructure.web.dto.ProductoResponse;
 import lombok.RequiredArgsConstructor;
 
 @RestController
