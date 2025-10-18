@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import es.etg.daw.dawes.java.rest.restfull.productos.application.command.CreateProductoCommand;
 import es.etg.daw.dawes.java.rest.restfull.productos.application.service.CreateProductoService;
+import es.etg.daw.dawes.java.rest.restfull.productos.application.service.FindProductoService;
 import es.etg.daw.dawes.java.rest.restfull.productos.domain.model.Producto;
 import es.etg.daw.dawes.java.rest.restfull.productos.infraestructure.mapper.ProductoMapper;
 import es.etg.daw.dawes.java.rest.restfull.productos.infraestructure.web.dto.ProductoRequest;
@@ -23,6 +24,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ProductoController {
     private final CreateProductoService createProductoService;
+	private final FindProductoService findProductoService;
+
 
 	@PostMapping //Método Post
 	public ResponseEntity<ProductoResponse> createProducto(@RequestBody ProductoRequest productoRequest) {
@@ -32,5 +35,12 @@ public class ProductoController {
 	}
 
     @GetMapping
-public List<ProductoResponse> allProductos();
+    public List<ProductoResponse> allProductos(){
+
+        return findProductoService.findAll()
+                .stream() //Convierte la lista en un flujo
+                .map(ProductoMapper::toResponse) //Mapeamos/Convertimos cada elemento del flujo (Producto) en un objeto de Respuesta (ProductoResponse)
+                .toList(); //Lo devuelve como una lista.
+
+    }
 }
