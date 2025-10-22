@@ -5,12 +5,10 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
 public record ProductoRequest(
-                // El nombre no puede estar en blanco
-                @NotBlank 
+                 @NotBlank (message = "{producto.valid.nombre.no_vacio}")
                     String nombre, 
-                  // El precio tiene que estar entre 0 y 100
-                @Min(value = 0) 
-                @Max(value = 100)
-                    double precio){
+                @Min(value = 0, message = "{producto.valid.precio.min}") 
+                @Max(value = 100, message = "{producto.valid.precio.max}")
+                    double precio) {
     
 }
