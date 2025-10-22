@@ -17,8 +17,16 @@ public class ProductoRepositoryMockImpl implements ProductoRepository{
 
     @Override
     public Producto save(Producto t) {
+        if (t.getId()==0) {
+            t.setId(obtenerSiguienteId());
+        }
+        
         productos.put(t.getId(), t);
         return t;
+    }
+
+    private int obtenerSiguienteId(){
+        return productos.size()+1;
     }
 
     @Override
