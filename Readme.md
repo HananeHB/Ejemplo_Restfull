@@ -8,8 +8,9 @@ Se ha desarrollado con **Spring Boot** y organiza el código en diferentes parte
 
 - Usando el **vertical slicing**, tenemos la siguiente estructura en el proyecto: 
 
-    **productos**
-    ├── application
+```bash
+    productos
+    ├── application 
     │   ├── command
     │   ├── service
     │   └── usecase
@@ -22,3 +23,4 @@ Se ha desarrollado con **Spring Boot** y organiza el código en diferentes parte
         ├── db
         ├── mapper
         └── web
+```
