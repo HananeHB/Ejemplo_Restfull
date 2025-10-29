@@ -61,6 +61,7 @@ public class ProductoController {
     
     @GetMapping
     public List<ProductoResponse> allProductos(){
+        //if(true) throw new NullPointerException(); //Para probar la excepcion de 
 
          if("1.0".equals(apiVersion)){
             return findProductoService.findAll()

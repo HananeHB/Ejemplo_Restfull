@@ -18,7 +18,7 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(NullPointerException.class)
 	public ResponseEntity<CustomResponse> nullPointerHandler(NullPointerException nfe) {
         String msg = nfe.getMessage();
-		CustomResponse cr = new CustomResponse(LocalDateTime.now(), HttpStatus.INTERNAL_SERVER_ERROR, msg);
+		CustomResponse cr = new CustomResponse(LocalDateTime.now(), HttpStatus.INTERNAL_SERVER_ERROR, "Hola mundo");
 		return new ResponseEntity<>(cr, cr.getStatus());
 	}
 }
