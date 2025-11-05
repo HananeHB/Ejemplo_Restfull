@@ -8,7 +8,7 @@ import es.etg.daw.dawes.java.rest.restfull.productos.domain.repository.Categoria
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class FindeCategoriaUseCase {
+public class FindCategoriaUseCase {
     private CategoriaRepository categoriaRepository;
 
     public List<Categoria> findAll(){
