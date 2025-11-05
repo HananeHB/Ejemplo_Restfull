@@ -9,11 +9,8 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Builder
-public class Producto {
-    // Atributos
-	private int id;
-	private String nombre;
-	private double precio;
+public class Categoria {
+    private CategoriaId id;
+    private String nombre;
 	private LocalDateTime createdAt;
-	private Categoria categoria;
 }
