@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import es.etg.daw.dawes.java.rest.restfull.productos.application.command.CreateProductoCommand;
-import es.etg.daw.dawes.java.rest.restfull.productos.application.command.EditProductoCommand;
+import es.etg.daw.dawes.java.rest.restfull.productos.application.command.producto.CreateProductoCommand;
+import es.etg.daw.dawes.java.rest.restfull.productos.application.command.producto.EditProductoCommand;
 import es.etg.daw.dawes.java.rest.restfull.productos.application.service.producto.CreateProductoService;
 import es.etg.daw.dawes.java.rest.restfull.productos.application.service.producto.DeleteProductoService;
 import es.etg.daw.dawes.java.rest.restfull.productos.application.service.producto.EditProductoService;

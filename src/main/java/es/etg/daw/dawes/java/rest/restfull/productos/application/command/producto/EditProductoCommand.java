@@ -1,4 +1,4 @@
-package es.etg.daw.dawes.java.rest.restfull.productos.application.command;
+package es.etg.daw.dawes.java.rest.restfull.productos.application.command.producto;
 
 import es.etg.daw.dawes.java.rest.restfull.productos.domain.model.ProductoId;
 import lombok.AllArgsConstructor;

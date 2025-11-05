@@ -7,10 +7,10 @@ import es.etg.daw.dawes.java.rest.restfull.productos.application.service.product
 import es.etg.daw.dawes.java.rest.restfull.productos.application.service.producto.DeleteProductoService;
 import es.etg.daw.dawes.java.rest.restfull.productos.application.service.producto.EditProductoService;
 import es.etg.daw.dawes.java.rest.restfull.productos.application.service.producto.FindProductoService;
-import es.etg.daw.dawes.java.rest.restfull.productos.application.usecase.CreateProductoUseCase;
-import es.etg.daw.dawes.java.rest.restfull.productos.application.usecase.DeleteProductoUseCase;
-import es.etg.daw.dawes.java.rest.restfull.productos.application.usecase.EditProductoUseCase;
-import es.etg.daw.dawes.java.rest.restfull.productos.application.usecase.FindProductoUseCase;
+import es.etg.daw.dawes.java.rest.restfull.productos.application.usecase.producto.CreateProductoUseCase;
+import es.etg.daw.dawes.java.rest.restfull.productos.application.usecase.producto.DeleteProductoUseCase;
+import es.etg.daw.dawes.java.rest.restfull.productos.application.usecase.producto.EditProductoUseCase;
+import es.etg.daw.dawes.java.rest.restfull.productos.application.usecase.producto.FindProductoUseCase;
 import es.etg.daw.dawes.java.rest.restfull.productos.domain.repository.ProductoRepository;
 import lombok.RequiredArgsConstructor;
 

@@ -1,6 +1,6 @@
-package es.etg.daw.dawes.java.rest.restfull.productos.application.usecase;
+package es.etg.daw.dawes.java.rest.restfull.productos.application.usecase.producto;
 
-import es.etg.daw.dawes.java.rest.restfull.productos.application.command.EditProductoCommand;
+import es.etg.daw.dawes.java.rest.restfull.productos.application.command.producto.EditProductoCommand;
 import es.etg.daw.dawes.java.rest.restfull.productos.domain.error.ProductoNotFoundException;
 import es.etg.daw.dawes.java.rest.restfull.productos.domain.model.Producto;
 import es.etg.daw.dawes.java.rest.restfull.productos.domain.repository.ProductoRepository;
