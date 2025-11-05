@@ -30,8 +30,8 @@ import es.etg.daw.dawes.java.rest.restfull.productos.application.service.product
 import es.etg.daw.dawes.java.rest.restfull.productos.domain.model.Producto;
 import es.etg.daw.dawes.java.rest.restfull.productos.domain.model.ProductoId;
 import es.etg.daw.dawes.java.rest.restfull.productos.infraestructure.mapper.ProductoMapper;
-import es.etg.daw.dawes.java.rest.restfull.productos.infraestructure.web.dto.ProductoRequest;
-import es.etg.daw.dawes.java.rest.restfull.productos.infraestructure.web.dto.ProductoResponse;
+import es.etg.daw.dawes.java.rest.restfull.productos.infraestructure.web.dto.producto.ProductoRequest;
+import es.etg.daw.dawes.java.rest.restfull.productos.infraestructure.web.dto.producto.ProductoResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -79,7 +79,7 @@ public class ProductoController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?>  deleteProducto(@PathVariable int id) {
         deleteProductoService.delete(new ProductoId(id));
-        return ResponseEntity.noContent().build(); //Devpñvemos una respuesta vacía.
+        return ResponseEntity.noContent().build(); //Devolvemos una respuesta vacía.
     }
 
     @PutMapping("/{id}")
