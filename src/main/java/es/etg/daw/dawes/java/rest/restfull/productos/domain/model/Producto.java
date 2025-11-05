@@ -11,9 +11,9 @@ import lombok.Data;
 @Builder
 public class Producto {
     // Atributos
-	private int id;
+	private ProductoId id;
 	private String nombre;
 	private double precio;
 	private LocalDateTime createdAt;
-	private Categoria categoria;
+	private CategoriaId categoria;
 }

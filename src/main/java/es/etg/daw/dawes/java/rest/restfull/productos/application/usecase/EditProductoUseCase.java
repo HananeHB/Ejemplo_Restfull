@@ -16,7 +16,7 @@ public class EditProductoUseCase {
                     p.setNombre(command.nombre());
                     p.setPrecio(command.precio());
                     return productoRepository.save(p);})
-                .orElseThrow(() -> new ProductoNotFoundException(command.id()));
+                .orElseThrow(() -> new ProductoNotFoundException(command.id().getValue()));
 
     }
 

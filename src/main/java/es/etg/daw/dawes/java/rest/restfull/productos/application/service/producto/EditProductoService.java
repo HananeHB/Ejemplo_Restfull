@@ -1,4 +1,4 @@
-package es.etg.daw.dawes.java.rest.restfull.productos.application.service;
+package es.etg.daw.dawes.java.rest.restfull.productos.application.service.producto;
 
 import org.springframework.stereotype.Service;
 

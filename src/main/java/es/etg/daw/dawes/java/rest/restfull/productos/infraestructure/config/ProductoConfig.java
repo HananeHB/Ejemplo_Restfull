@@ -3,10 +3,10 @@ package es.etg.daw.dawes.java.rest.restfull.productos.infraestructure.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import es.etg.daw.dawes.java.rest.restfull.productos.application.service.CreateProductoService;
-import es.etg.daw.dawes.java.rest.restfull.productos.application.service.DeleteProductoService;
-import es.etg.daw.dawes.java.rest.restfull.productos.application.service.EditProductoService;
-import es.etg.daw.dawes.java.rest.restfull.productos.application.service.FindProductoService;
+import es.etg.daw.dawes.java.rest.restfull.productos.application.service.producto.CreateProductoService;
+import es.etg.daw.dawes.java.rest.restfull.productos.application.service.producto.DeleteProductoService;
+import es.etg.daw.dawes.java.rest.restfull.productos.application.service.producto.EditProductoService;
+import es.etg.daw.dawes.java.rest.restfull.productos.application.service.producto.FindProductoService;
 import es.etg.daw.dawes.java.rest.restfull.productos.application.usecase.CreateProductoUseCase;
 import es.etg.daw.dawes.java.rest.restfull.productos.application.usecase.DeleteProductoUseCase;
 import es.etg.daw.dawes.java.rest.restfull.productos.application.usecase.EditProductoUseCase;
