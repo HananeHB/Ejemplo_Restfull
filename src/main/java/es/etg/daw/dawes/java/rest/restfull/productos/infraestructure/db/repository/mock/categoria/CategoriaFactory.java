@@ -13,7 +13,7 @@ public class CategoriaFactory {
         Map<CategoriaId, Categoria> datos = new LinkedHashMap<>();
 
         datos.put(new CategoriaId(1), new Categoria(new CategoriaId(1), "Categoria 1", LocalDateTime.now()));
-        datos.put(new CategoriaId(2), new Categoria(new CategoriaId(1), "Categoria 2", LocalDateTime.now()));
+        datos.put(new CategoriaId(2), new Categoria(new CategoriaId(2), "Categoria 2", LocalDateTime.now()));
         return datos;
     }
 }
