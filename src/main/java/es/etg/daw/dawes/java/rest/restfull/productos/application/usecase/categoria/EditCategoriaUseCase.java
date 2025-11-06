@@ -1,7 +1,7 @@
 package es.etg.daw.dawes.java.rest.restfull.productos.application.usecase.categoria;
 
 import es.etg.daw.dawes.java.rest.restfull.productos.application.command.categoria.EditCategoriaCommand;
-import es.etg.daw.dawes.java.rest.restfull.productos.domain.error.ProductoNotFoundException;
+import es.etg.daw.dawes.java.rest.restfull.productos.domain.error.CategoriaNotFoundException;
 import es.etg.daw.dawes.java.rest.restfull.productos.domain.model.Categoria;
 import es.etg.daw.dawes.java.rest.restfull.productos.domain.repository.CategoriaRepository;
 import lombok.AllArgsConstructor;
@@ -16,7 +16,7 @@ public class EditCategoriaUseCase {
                     p.setNombre(command.nombre());
                     return categoriaRepository.save(p);
                 })
-                .orElseThrow(() -> new ProductoNotFoundException(command.id().getValue()));
+                .orElseThrow(() -> new CategoriaNotFoundException(command.id().getValue()));
 
     }
 

@@ -62,7 +62,7 @@ public class CategoriaController {
 
     @GetMapping
     public List<CategoriaResponse> allCategorias(){
-        if(true) throw new NullPointerException(); //Para probar la excepcion de 
+        // if(true) throw new NullPointerException(); //Para probar la excepcion de 
 
          if("1.0".equals(apiVersion)){
             return findCategoriaService.findAll()

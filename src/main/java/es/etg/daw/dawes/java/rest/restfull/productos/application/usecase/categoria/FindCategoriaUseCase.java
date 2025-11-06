@@ -2,7 +2,7 @@ package es.etg.daw.dawes.java.rest.restfull.productos.application.usecase.catego
 
 import java.util.List;
 
-import es.etg.daw.dawes.java.rest.restfull.productos.domain.error.ProductoNotFoundException;
+import es.etg.daw.dawes.java.rest.restfull.productos.domain.error.CategoriaNotFoundException;
 import es.etg.daw.dawes.java.rest.restfull.productos.domain.model.Categoria;
 import es.etg.daw.dawes.java.rest.restfull.productos.domain.repository.CategoriaRepository;
 import lombok.AllArgsConstructor;
@@ -15,7 +15,7 @@ public class FindCategoriaUseCase {
         List<Categoria> categorias = categoriaRepository.getAll();
 
         if (categorias.isEmpty())
-            throw new ProductoNotFoundException();
+            throw new CategoriaNotFoundException();
 
         return categorias;
     }
