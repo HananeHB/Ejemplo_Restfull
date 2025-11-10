@@ -27,7 +27,12 @@ Además, se ha incorporado **caché en memoria** para mejorar el rendimiento de 
     └── infraestructure
         ├── config
         ├── db
+            └── repository
+                └── mock
         ├── mapper
         └── web
+            ├── dto
+            └── rest
+
     RestfullApplication.java
 ```
