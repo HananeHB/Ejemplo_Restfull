@@ -15,7 +15,7 @@ public class EditCategoriaService extends CategoriaService{
     private EditCategoriaUseCase editCategoriaUseCase;
 
     @CacheEvict (allEntries = true) //Elimina de cache la lista
-    @CachePut (key="#command.id") // Agregamos a la cache la entrada con key = id (está en el comando)
+    @CachePut(key = "#commando.id") // Agregamos a la cache la entrada con key = id (está en el comando)
     public Categoria update(EditCategoriaCommand commando){
         Categoria categoria = editCategoriaUseCase.update(commando);
         return categoria;
