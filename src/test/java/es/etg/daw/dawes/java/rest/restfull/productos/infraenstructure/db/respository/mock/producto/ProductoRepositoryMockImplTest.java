@@ -1,0 +1,62 @@
+package es.etg.daw.dawes.java.rest.restfull.productos.infraenstructure.db.respository.mock.producto;
+
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import es.etg.daw.dawes.java.rest.restfull.productos.domain.model.Producto;
+import es.etg.daw.dawes.java.rest.restfull.productos.domain.repository.ProductoRepository;
+import es.etg.daw.dawes.java.rest.restfull.productos.infraestructure.db.repository.mock.producto.ProductoFactory;
+import es.etg.daw.dawes.java.rest.restfull.productos.infraestructure.db.repository.mock.producto.ProductoRepositoryMockImpl;
+
+public class ProductoRepositoryMockImplTest {
+    ProductoRepository repository = new ProductoRepositoryMockImpl();
+
+    @BeforeEach
+    void setUp() {
+        // Inicializamos las el repositorio
+        repository = new ProductoRepositoryMockImpl();
+
+    }
+
+    @Test
+    void save(){
+        var producto = ProductoFactory.create();
+      
+        Producto p = repository.save(producto);
+
+        assertAll(
+                () -> assertNotNull(p), // el producto no es nulo
+                () -> assertNotNull(p.getId()), // el producto creado tiene id
+                () -> assertNotNull(repository.getById(p.getId())) // si lo busco lo debo recuperar *opcional
+        );
+        
+    }
+
+    @Test
+    void getAll() {
+        var productos = repository.getAll();
+
+        assertAll(
+                () -> assertNotNull(productos),
+                () -> assertEquals(ProductoFactory.getDemoData().size(), productos.size())
+        );
+    }
+
+    // falta el getById
+    @Test
+    void deleteById(){
+        var producto = ProductoFactory.create();
+        var idProducto = producto.getId();
+        repository.save(producto);
+        repository.deteteById(idProducto);
+
+        var productos = repository.getAll();
+        assertFalse(productos.isEmpty());
+    }
+}
