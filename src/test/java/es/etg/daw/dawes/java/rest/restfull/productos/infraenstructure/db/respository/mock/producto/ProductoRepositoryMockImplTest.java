@@ -48,7 +48,6 @@ public class ProductoRepositoryMockImplTest {
         );
     }
 
-    // falta el getById
 
     @Test
     void getById(){
