@@ -2,7 +2,6 @@ package es.etg.daw.dawes.java.rest.restfull.productos.infraenstructure.db.respos
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -10,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import es.etg.daw.dawes.java.rest.restfull.productos.domain.model.Producto;
+import es.etg.daw.dawes.java.rest.restfull.productos.domain.model.ProductoId;
 import es.etg.daw.dawes.java.rest.restfull.productos.domain.repository.ProductoRepository;
 import es.etg.daw.dawes.java.rest.restfull.productos.infraestructure.db.repository.mock.producto.ProductoFactory;
 import es.etg.daw.dawes.java.rest.restfull.productos.infraestructure.db.repository.mock.producto.ProductoRepositoryMockImpl;
@@ -49,14 +49,25 @@ public class ProductoRepositoryMockImplTest {
     }
 
     // falta el getById
+
+    @Test
+    void getById(){
+        var idEsperado = 1;
+        var producto = repository.getById(new ProductoId(idEsperado));
+        assertAll(
+                () -> assertNotNull(producto),
+                () -> assertEquals(idEsperado, producto.get().getId().getValue())
+
+        );
+
+    }
+
     @Test
     void deleteById(){
-        var producto = ProductoFactory.create();
-        var idProducto = producto.getId();
-        repository.save(producto);
-        repository.deteteById(idProducto);
-
-        var productos = repository.getAll();
-        assertFalse(productos.isEmpty());
+        var idProductoPrueba = new ProductoId(1);
+        repository.deteteById(idProductoPrueba);
+       
+        assertTrue(repository.getById(idProductoPrueba).isEmpty());
+    
     }
 }
