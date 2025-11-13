@@ -20,7 +20,7 @@ public class ProductoFactory {
         return datos;
     }
 
-    public static Producto create() {
-        return new Producto(new ProductoId(1), "Nuevo producto", 2.99, LocalDateTime.now(), new CategoriaId(1));
+    public static final Producto create() {
+        return new Producto(new ProductoId(5), "Nuevo", 2.99, LocalDateTime.now(), new CategoriaId(1));
     }
 }

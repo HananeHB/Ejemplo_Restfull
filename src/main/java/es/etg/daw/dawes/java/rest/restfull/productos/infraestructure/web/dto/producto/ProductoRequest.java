@@ -1,6 +1,5 @@
 package es.etg.daw.dawes.java.rest.restfull.productos.infraestructure.web.dto.producto;
 
-import es.etg.daw.dawes.java.rest.restfull.productos.domain.model.CategoriaId;
 import es.etg.daw.dawes.java.rest.restfull.productos.domain.model.Producto;
 import es.etg.daw.dawes.java.rest.restfull.productos.infraestructure.web.validation.NombradoProducto;
 import jakarta.validation.constraints.Max;
