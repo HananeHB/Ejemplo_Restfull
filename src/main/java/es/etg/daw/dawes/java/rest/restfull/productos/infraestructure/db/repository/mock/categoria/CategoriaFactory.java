@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.springframework.cglib.core.Local;
 
 import es.etg.daw.dawes.java.rest.restfull.productos.domain.model.Categoria;
 import es.etg.daw.dawes.java.rest.restfull.productos.domain.model.CategoriaId;

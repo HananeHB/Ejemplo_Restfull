@@ -58,6 +58,13 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
     	</dependency>
+
+		<!-- Dependencia para usar Json y Tipo  java.time.LocalDateTime en las pruebas-->
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jsr310</artifactId>
+		</dependency>
+		
 	</dependencies>
  
  
