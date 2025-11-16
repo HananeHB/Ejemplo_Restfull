@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 
 import java.util.List;
 
@@ -26,7 +27,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import es.etg.daw.dawes.java.rest.restfull.productos.domain.model.Categoria;
+import es.etg.daw.dawes.java.rest.restfull.productos.domain.model.CategoriaId;
 import es.etg.daw.dawes.java.rest.restfull.productos.domain.model.Producto;
+import es.etg.daw.dawes.java.rest.restfull.productos.domain.model.ProductoId;
 import es.etg.daw.dawes.java.rest.restfull.productos.infraestructure.db.repository.mock.categoria.CategoriaFactory;
 import es.etg.daw.dawes.java.rest.restfull.productos.infraestructure.db.repository.mock.producto.ProductoFactory;
 import es.etg.daw.dawes.java.rest.restfull.productos.infraestructure.web.dto.categoria.CategoriaRequest;
@@ -96,9 +99,9 @@ public class CategoriaControllerIT {
     @Test
     @Order(10)
     public void When_Post_CreateCategoria() throws Exception{
-        Categoria nuevo = CategoriaFactory.create();
+        Categoria nueva = CategoriaFactory.create();
 
-        CategoriaRequest req = new CategoriaRequest(nuevo);
+        CategoriaRequest req = new CategoriaRequest(nueva);
 
             //Realizo la petición POST
         MockHttpServletResponse response = mockMvc.perform(
@@ -115,9 +118,90 @@ public class CategoriaControllerIT {
                     //Evaluo la salida
         assertAll(
                 () -> assertEquals(response.getStatus(), HttpStatus.CREATED.value()), //Ha ido bien
-                () -> assertEquals(res.nombre(), nuevo.getNombre()),
+                () -> assertEquals(res.nombre(), nueva.getNombre()),
                 () -> assertTrue(res.id()>0)
         );
     }
+
+
+    @Test
+    @Order(11)
+    public void Erro_ValidationError_When_CreateCategoria_NombreVacio() throws Exception{
+        Categoria nueva = CategoriaFactory.create();
+        nueva.setNombre("Categoria prueba");
+
+        CategoriaRequest req = new CategoriaRequest(nueva);
+
+        //Realizo la petición POST
+        MockHttpServletResponse response = mockMvc.perform(
+                        post(ENDPOINT)
+                                .contentType(MediaType.APPLICATION_JSON)
+                                // Le paso el body
+                                .content(jsonCategoriaRequest.write(req).getJson())
+                                .accept(MediaType.APPLICATION_JSON))
+                .andReturn().getResponse();
+
+            //Gestiono la respuesta
+        CategoriaResponse res = mapper.readValue(response.getContentAsString(), CategoriaResponse.class);
+
+                    //Evaluo la salida
+        assertAll(
+                () -> assertEquals(response.getStatus(), HttpStatus.BAD_REQUEST.value()) //Ha ido bien
+        );
+
+    }
+
+
+    @Test
+    @Order(20)
+    public void When_Put_EditCategoria() throws Exception{
+        Categoria nueva = CategoriaFactory.create();
+        nueva.setId(new CategoriaId(1));
+
+        CategoriaRequest req = new CategoriaRequest(nueva);
+
+            //Realizo la petición POST
+        MockHttpServletResponse response = mockMvc.perform(
+                            // categorias /{id} -> categorias/1
+                        put(ENDPOINT+"/"+nueva.getId().getValue())
+                                .contentType(MediaType.APPLICATION_JSON)
+                                // Le paso el body
+                                .content(jsonCategoriaRequest.write(req).getJson())
+                                .accept(MediaType.APPLICATION_JSON))
+                .andReturn().getResponse();
+
+            //Gestiono la respuesta
+        CategoriaResponse res = mapper.readValue(response.getContentAsString(), CategoriaResponse.class);
+
+                    //Evaluo la salida
+        assertAll(
+                () -> assertEquals(response.getStatus(), HttpStatus.OK.value()), //Ha ido bien
+                () -> assertEquals(res.nombre(), nueva.getNombre()),
+                () -> assertEquals(res.id(), nueva.getId().getValue())
+        );
+    }
+
+
+    @Test 
+    @Order(21)
+    public void Error_NotFound_When_PutEditCategoria_NotExiste() throws Exception{
+        int idNoExiste = 99;
+        CategoriaRequest req = new CategoriaRequest("categoria_Prueba");
+
+        MockHttpServletResponse response = mockMvc.perform(
+                                    // categorias/{id} -> categorias/99
+                                put(ENDPOINT+"/"+idNoExiste)
+                                        .contentType(MediaType.APPLICATION_JSON)
+                                        // Le paso el body
+                                        .content(jsonCategoriaRequest.write(req).getJson())
+                                        .accept(MediaType.APPLICATION_JSON))
+                        .andReturn().getResponse();
+        //Evaluar el estado 
+        assertAll(
+            () -> assertEquals(response.getStatus(), HttpStatus.NOT_FOUND.value())
+        );
+    }
+
+
     
 }
