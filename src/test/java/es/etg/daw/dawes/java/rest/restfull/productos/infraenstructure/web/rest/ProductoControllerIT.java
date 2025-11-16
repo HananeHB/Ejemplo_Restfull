@@ -2,6 +2,7 @@ package es.etg.daw.dawes.java.rest.restfull.productos.infraenstructure.web.rest;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -102,6 +103,7 @@ public class ProductoControllerIT {
         );
     }
 
+    
     @Test
     @Order(10)
     public void When_Post_CreateProducto() throws Exception{
@@ -194,6 +196,27 @@ public class ProductoControllerIT {
     }
 
 
+    @Test 
+    @Order(21)
+    public void Error_NotFound_When_PutEditProducto_NotExiste() throws Exception{
+        int idNoExiste = 99;
+        ProductoRequest req = new ProductoRequest("Producto", 1.00, 1);
+
+        MockHttpServletResponse response = mockMvc.perform(
+                                    // productos/{id} -> productos/99
+                                put(ENDPOINT+"/"+idNoExiste)
+                                        .contentType(MediaType.APPLICATION_JSON)
+                                        // Le paso el body
+                                        .content(jsonProductoRequest.write(req).getJson())
+                                        .accept(MediaType.APPLICATION_JSON))
+                        .andReturn().getResponse();
+        //Evaluar el estado 
+        assertAll(
+            () -> assertEquals(response.getStatus(), HttpStatus.NOT_FOUND.value())
+        );
+    }
+
+
     @Test
     @Order(30)
     public void When_Delete_DeleteProducto() throws Exception{
@@ -216,6 +239,23 @@ public class ProductoControllerIT {
         assertAll(
                 () -> assertEquals(response.getStatus(), HttpStatus.NO_CONTENT.value()) //Ha ido bien
         );
+    }
+
+    @Test
+    @Order(31)
+    public void Error_NotFound_When_DeleteProducto_NoExiste() throws Exception{
+        int idNoExistente = 99;
+        //Realizar la petición delete
+        MockHttpServletResponse response = mockMvc.perform(
+                                            // productos/{id} -> productos/99
+                                        delete(ENDPOINT+"/"+idNoExistente)
+                                                .accept(MediaType.APPLICATION_JSON))
+                                .andReturn().getResponse();
+
+        //Evaluar el estado 
+        assertAll(
+            () -> assertEquals(response.getStatus(), HttpStatus.NOT_FOUND.value())
+        );                   
     }
 
 }

@@ -15,7 +15,12 @@ public class EditProductoService extends ProductoService {
     private final EditProductoUseCase editProductoUseCase;
 
     @CacheEvict (allEntries = true) //Elimina de cache la lista
-    @CachePut (key="#command.id") // Agregamos a la cache la entrada con key = id (está en el comando)
+    //@CachePut (key="#command.id") // Agregamos a la cache la entrada con key = id (está en el comando)
+    /**
+     * Actualiza la caché 'productos' con el objeto devuelto, usando su 'id' como clave, 
+     * PERO solo si el resultado (#result) NO es nulo (para evitar el errores).
+     */
+    @CachePut(value = "productos", key = "#result.id", unless = "#result == null")
     public Producto update(EditProductoCommand commando){
         Producto producto = editProductoUseCase.update(commando);
         return producto;
