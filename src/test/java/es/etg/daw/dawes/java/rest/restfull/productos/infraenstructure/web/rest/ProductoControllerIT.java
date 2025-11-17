@@ -67,8 +67,8 @@ public class ProductoControllerIT {
     private JacksonTester<ProductoRequest> jsonProductoRequest;
 
         // Para métodos que devuelve una respuesta
-    @Autowired
-    private JacksonTester<ProductoResponse> jsonProductoResponse;
+    // @Autowired
+    // private JacksonTester<ProductoResponse> jsonProductoResponse;
 
     @BeforeEach
     public void setUp(){
