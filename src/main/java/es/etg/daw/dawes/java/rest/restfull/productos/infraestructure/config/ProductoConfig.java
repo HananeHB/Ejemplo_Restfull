@@ -12,17 +12,27 @@ import es.etg.daw.dawes.java.rest.restfull.productos.application.usecase.product
 import es.etg.daw.dawes.java.rest.restfull.productos.application.usecase.producto.EditProductoUseCase;
 import es.etg.daw.dawes.java.rest.restfull.productos.application.usecase.producto.FindProductoUseCase;
 import es.etg.daw.dawes.java.rest.restfull.productos.domain.repository.ProductoRepository;
+import es.etg.daw.dawes.java.rest.restfull.productos.infraestructure.db.jpa.repository.ProductoEntityJpaRepository;
+import es.etg.daw.dawes.java.rest.restfull.productos.infraestructure.db.jpa.repository.ProductoJpaRepositoryImpl;
 import lombok.RequiredArgsConstructor;
 
 @Configuration
 @RequiredArgsConstructor
 public class ProductoConfig {
 
-    private final ProductoRepository productoRepository;
+    // private final ProductoRepository productoRepository;
+    private final ProductoEntityJpaRepository productoRepository;
+
+
+     // Creo por configuración la instalacia que me interesa del productoRepository (desde jpa)
+    @Bean
+    public  ProductoRepository productoRepository(){
+        return new ProductoJpaRepositoryImpl(productoRepository);
+    }
 
      @Bean
     public CreateProductoUseCase createProductoUseCase() {
-        return new CreateProductoUseCase(productoRepository);
+        return new CreateProductoUseCase(productoRepository());
     }
     @Bean
     public CreateProductoService createProductoService(){
@@ -31,7 +41,7 @@ public class ProductoConfig {
 
       @Bean
     public FindProductoUseCase findProductoUseCase(){
-        return new FindProductoUseCase(productoRepository);
+        return new FindProductoUseCase(productoRepository());
     }
 
     @Bean
@@ -41,7 +51,7 @@ public class ProductoConfig {
 
      @Bean
     public DeleteProductoUseCase deleteProductoUseCase(){
-        return new DeleteProductoUseCase(productoRepository);
+        return new DeleteProductoUseCase(productoRepository());
     }
 
     @Bean
@@ -51,7 +61,7 @@ public class ProductoConfig {
 
     @Bean 
     public EditProductoUseCase editProductoUseCase(){
-        return new EditProductoUseCase(productoRepository);
+        return new EditProductoUseCase(productoRepository());
     }
 
     @Bean

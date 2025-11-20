@@ -19,7 +19,7 @@ public class ProductoEntity {
     // MySQL lo mapea a 'AUTO_INCREMENT'. Es el método más portable.
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(name = "nombre", nullable = false, length = 255)
     private String nombre;
@@ -55,7 +55,7 @@ public class ProductoEntity {
     }
 
     // Constructor con campos (simplificado)
-    public ProductoEntity(Long id, String nombre, BigDecimal precio, LocalDateTime fechaCreacion, CategoriaEntity categoria) {
+    public ProductoEntity(Integer id, String nombre, BigDecimal precio, LocalDateTime fechaCreacion, CategoriaEntity categoria) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
