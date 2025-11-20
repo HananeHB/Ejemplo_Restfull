@@ -60,7 +60,7 @@ public class CategoriaControllerIT {
 
     // Para métodos que devuelve una respuesta
     @Autowired
-    private JacksonTester<CategoriaResponse> jsonCategoriaResponse;
+    // private JacksonTester<CategoriaResponse> jsonCategoriaResponse;
 
     @BeforeEach
     public void setUp() {
