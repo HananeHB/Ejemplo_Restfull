@@ -26,9 +26,18 @@ public class CategoriaMapper {
 		return new EditCategoriaCommand(id, categoriaRequest.nombre());
 	}
 
-	public static Categoria toDomain(CategoriaEntity p){
-        return Categoria.builder().id(new CategoriaId(p.getId()))
-                                 .nombre(p.getNombre())
+	public static CategoriaEntity toEntity(Categoria c){
+
+        CategoriaId id = c.getId();
+        return CategoriaEntity.builder().id(id!=null?id.getValue():null)
+                                    .nombre(c.getNombre())
+                                    .build();
+
+    }
+
+	public static Categoria toDomain(CategoriaEntity c){
+        return Categoria.builder().id(new CategoriaId(c.getId()))
+                                 .nombre(c.getNombre())
                                  .build();
 
     }
