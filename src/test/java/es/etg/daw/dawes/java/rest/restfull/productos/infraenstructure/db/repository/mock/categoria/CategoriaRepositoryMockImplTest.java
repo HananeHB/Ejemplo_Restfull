@@ -1,4 +1,4 @@
-package es.etg.daw.dawes.java.rest.restfull.productos.infraenstructure.db.jpa.repository.mock.categoria;
+package es.etg.daw.dawes.java.rest.restfull.productos.infraenstructure.db.repository.mock.categoria;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
