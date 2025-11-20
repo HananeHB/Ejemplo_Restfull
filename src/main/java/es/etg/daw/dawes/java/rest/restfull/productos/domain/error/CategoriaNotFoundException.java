@@ -11,6 +11,10 @@ import es.etg.daw.dawes.java.rest.restfull.common.domain.error.EntityNotFoundExc
 public class CategoriaNotFoundException extends EntityNotFoundException{
     public static final String ENTIDAD = "categoría";
 
+    public CategoriaNotFoundException(String mensaje) {
+        super(mensaje);
+    }
+    
     public CategoriaNotFoundException(){
         super(ENTIDAD);
     }
