@@ -32,44 +32,52 @@ import es.etg.daw.dawes.java.rest.restfull.productos.domain.model.ProductoId;
 import es.etg.daw.dawes.java.rest.restfull.productos.infraestructure.mapper.ProductoMapper;
 import es.etg.daw.dawes.java.rest.restfull.productos.infraestructure.web.dto.producto.ProductoRequest;
 import es.etg.daw.dawes.java.rest.restfull.productos.infraestructure.web.dto.producto.ProductoResponse;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/productos") // le estoy diciendo que apartir de /productos vamos a trabajar
 @RequiredArgsConstructor
+@Tag(name = "Productos", description = "Operaciones relacionadas con la gestión de productos")
 public class ProductoController {
     private final CreateProductoService createProductoService;
-	private final FindProductoService findProductoService;
-	private final DeleteProductoService deleteProductoService;
+    private final FindProductoService findProductoService;
+    private final DeleteProductoService deleteProductoService;
     private final EditProductoService editProductoService;
 
-
-	@PostMapping //Método Post
-	public ResponseEntity<ProductoResponse> createProducto(
-        // Indicamos que valide los datos de la request
-        @Valid
-        @RequestBody 
-            ProductoRequest productoRequest) {
-        CreateProductoCommand comando = ProductoMapper.toCommand(productoRequest); 
+    @PostMapping // Método Post
+    public ResponseEntity<ProductoResponse> createProducto(
+            // Indicamos que valide los datos de la request
+            @Valid @RequestBody ProductoRequest productoRequest) {
+        CreateProductoCommand comando = ProductoMapper.toCommand(productoRequest);
         Producto producto = createProductoService.createProducto(comando);
-        return ResponseEntity.status(HttpStatus.CREATED).body(ProductoMapper.toResponse(producto)); //Respuestagit@github.com:julparper/dawes-springboot-restful.git
-	}
+        return ResponseEntity.status(HttpStatus.CREATED).body(ProductoMapper.toResponse(producto)); // Respuestagit@github.com:julparper/dawes-springboot-restful.git
+    }
 
-    //Recogemos la versión el properties
+    // Recogemos la versión el properties
     @Value("${api.version}")
     private String apiVersion;
-    
-    @GetMapping
-    public List<ProductoResponse> allProductos(){
-        // if(true) throw new NullPointerException(); //Para probar la excepcion de 
 
-         if("1.0".equals(apiVersion)){
+    @Operation(summary = "Obtiene el listado de productos", description = "Busca en la base de datos todos los productos y sus detalles")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Listado de productos generado"),
+            @ApiResponse(responseCode = "404", description = "No hay productos en la base de datos")
+    })
+    @GetMapping
+    public List<ProductoResponse> allProductos() {
+        // if(true) throw new NullPointerException(); //Para probar la excepcion de
+
+        if ("1.0".equals(apiVersion)) {
             return findProductoService.findAll()
-                    .stream() //Convierte la lista en un flujo
-                    .map(ProductoMapper::toResponse) //Mapeamos/Convertimos cada elemento del flujo (Producto) en un objeto de Respuesta (ProductoResponse)
-                    .toList(); //Lo devuelve como una lista.
-        }else{
+                    .stream() // Convierte la lista en un flujo
+                    .map(ProductoMapper::toResponse) // Mapeamos/Convertimos cada elemento del flujo (Producto) en un
+                                                     // objeto de Respuesta (ProductoResponse)
+                    .toList(); // Lo devuelve como una lista.
+        } else {
             // Lanzamos una excepción con el error
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Versión del API incorrecta");
         }
@@ -77,19 +85,20 @@ public class ProductoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?>  deleteProducto(@PathVariable int id) {
+    public ResponseEntity<?> deleteProducto(@PathVariable int id) {
         deleteProductoService.delete(new ProductoId(id));
-        return ResponseEntity.noContent().build(); //Devolvemos una respuesta vacía.
+        return ResponseEntity.noContent().build(); // Devolvemos una respuesta vacía.
     }
 
     @PutMapping("/{id}")
-    public ProductoResponse editProducto(@PathVariable int id, @RequestBody ProductoRequest productoRequest){
+    public ProductoResponse editProducto(@PathVariable int id, @RequestBody ProductoRequest productoRequest) {
         EditProductoCommand comando = ProductoMapper.toCommand(new ProductoId(id), productoRequest);
         Producto producto = editProductoService.update(comando);
-        return  ProductoMapper.toResponse(producto); //Respuesta
+        return ProductoMapper.toResponse(producto); // Respuesta
     }
 
-     // Método que captura los errores y devuelve un mapa con el campo que no cumple la validación y un mensaje de error.
+    // Método que captura los errores y devuelve un mapa con el campo que no cumple
+    // la validación y un mensaje de error.
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
